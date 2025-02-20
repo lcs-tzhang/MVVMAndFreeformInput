@@ -1,5 +1,5 @@
 import SwiftUI
- 
+
 struct PowerView: View {
     
     // MARK: Stored properties
@@ -7,7 +7,7 @@ struct PowerView: View {
     // Holds the view model, to track current state of
     // data within the app
     @State var viewModel = PowerViewModel()
- 
+    
     // MARK: Computed properties
     var body: some View {
         VStack {
@@ -35,18 +35,24 @@ struct PowerView: View {
                             .font(.system(size: 44))
                     }
                     HStack {
- 
                         Text("=")
                             .font(.system(size: 96))
- 
-                        Text("\(power.result.formatted())")
-                            .font(.system(size: 96))
+                        if power.exponent < 0 {
+                            
+                            let result = 1.0 / (power.base * power.base)
+                            Text("\(result.formatted())")
+                                .font(.system(size: 96))
+                        } else {
+                            
+                            Text("\(power.result.formatted())")
+                                .font(.system(size: 96))
+                        }
                     }
                 }
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .frame(height: 300)
- 
+                
             } else {
                 
                 // Show a message indicating that we are
@@ -65,15 +71,15 @@ struct PowerView: View {
             
             TextField("Exponent", text: $viewModel.providedExponent)
                 .textFieldStyle(.roundedBorder)
- 
+            
             // Extra space at bottom
             Spacer()
         }
         .padding()
     }
- 
+    
 }
- 
+
 #Preview {
     PowerView()
 }
