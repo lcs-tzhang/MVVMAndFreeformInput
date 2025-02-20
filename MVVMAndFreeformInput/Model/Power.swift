@@ -41,7 +41,11 @@ struct Power {
         
         // Start by making the solution equal to 1
         var solution = 1.0
+        if exponent == 0 {
+            return 1
+        }
         
+       
         // Repeatedly multiply the base by itself
         // as many more times as needed
         for _ in 1...exponent {
